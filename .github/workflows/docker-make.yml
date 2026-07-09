@@ -3,7 +3,7 @@ name: Run Docker Makefile
 on:
   push:
     branches:
-      - release-1.8.3
+      - v1.8.3-patch
   workflow_dispatch:
 
 jobs:
