@@ -8,8 +8,8 @@ push:
 
 .PHONY: build
 build:
-	docker build . --tag v1.8.3
+	docker build . --tag $(TAG)
 
 .PHONY: docker-build
 docker-build:
-	docker run --interactive --rm -e RUST_BACKTRACE=1 --volume $(PWD):/app v1.8.3 make -C $(RUNNER)
+	docker run --interactive --rm -e RUST_BACKTRACE=1 -e CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG=true --volume $(PWD):/app $(TAG) make -C $(RUNNER)
