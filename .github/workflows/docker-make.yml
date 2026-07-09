@@ -1,0 +1,27 @@
+name: Run Docker Makefile
+
+on:
+  push:
+    branches:
+      - release-1.8.3
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Run Makefile Build Target
+      run: make -f docker-Makefile build
+
+    - name: Run Makefile Docker Build Target
+      run: make -f docker-Makefile docker-build
+
+    - name: Generate and Print Artifact Checksums
+      run: sha256sum runners/embedded/artifacts/*
